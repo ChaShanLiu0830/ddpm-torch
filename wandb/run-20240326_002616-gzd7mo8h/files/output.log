@@ -1,0 +1,36 @@
+Dataset: cifar10
+Effective batch-size is 32 * 1 = 32.
+Files already downloaded and verified
+Checkpoint will be saved to /home/evan0830/diffusion/ddpm-torch/chkpts/cifar10/cifar10.pt every 10 epoch(s)
+Generated images (x32) will be saved to /home/evan0830/diffusion/ddpm-torch/images/train/cifar10 every 10 epoch(s)
+cuDNN benchmark: ON
+Training starts...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

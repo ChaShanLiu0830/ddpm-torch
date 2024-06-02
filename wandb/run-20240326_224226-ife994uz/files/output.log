@@ -1,0 +1,185 @@
+Dataset: cifar10
+Effective batch-size is 32 * 1 = 32.
+Files already downloaded and verified
+Checkpoint will be saved to /home/evan0830/diffusion/ddpm-torch/chkpts/cifar10/cifar10.pt every 10 epoch(s)
+Generated images (x32) will be saved to /home/evan0830/diffusion/ddpm-torch/images/train/cifar10 every 10 epoch(s)
+cuDNN benchmark: ON
+Training starts...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1/2040 epochs: 100%|██████████████████████████████████████████████████████████████| 1562/1562 [04:00<00:00,  6.50it/s, loss=0.248]
+Evaluating FID:   0%|                                                                                      | 0/10 [00:00<?, ?it/s]
+
+
+
+
+
+
+
+
+Evaluating FID:  90%|██████████████████████████████████████████████████████████████████████▏       | 9/10 [04:40<00:31, 31.14s/it]
+Traceback (most recent call last):
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 313, in <module>
+    main()
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 309, in main
+    train(args=args, wandb= wandb)
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 237, in train
+    trainer.train(evaluator, chkpt_path=chkpt_path, image_dir=image_dir)
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/utils/train.py", line 244, in train
+    eval_results = evaluator.eval(self.sample_fn, is_leader=self.is_leader)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/metrics/__init__.py", line 48, in eval
+    x = sample_fn(sample_size=batch_size, diffusion=self.diffusion)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/utils/train.py", line 199, in sample_fn
+    sample = diffusion.p_sample(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/diffusion.py", line 177, in p_sample
+    x_t = self.p_sample_step(denoise_fn, x_t, t, generator=rng)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/diffusion.py", line 157, in p_sample_step
+    model_mean, _, model_logvar, pred_x_0 = self.p_mean_var(
+                                            ^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/diffusion.py", line 113, in p_mean_var
+    out = denoise_fn(x_t, t)
+          ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/models/unet.py", line 206, in forward
+    t_emb = get_timestep_embedding(t, self.hid_channels)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.jit.Error: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript (most recent call last):
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/functions.py", line 25, in get_timestep_embedding
+    if embed_dim % 2 == 1:
+        embed = F.pad(embed, [0, 1])  # padding the last dimension
+    assert embed.dtype == dtype
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~ <--- HERE
+    return embed
+RuntimeError: AssertionError:

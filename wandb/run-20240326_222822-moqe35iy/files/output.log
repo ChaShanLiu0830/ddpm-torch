@@ -1,0 +1,147 @@
+Dataset: cifar10
+Effective batch-size is 32 * 1 = 32.
+Files already downloaded and verified
+Checkpoint will be saved to /home/evan0830/diffusion/ddpm-torch/chkpts/cifar10/cifar10.pt every 10 epoch(s)
+Generated images (x32) will be saved to /home/evan0830/diffusion/ddpm-torch/images/train/cifar10 every 10 epoch(s)
+start eval
+cuDNN benchmark: ON
+Training starts...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1/2040 epochs:  74%|█████████████████████████████████████████████▋                | 1152/1562 [02:57<01:03,  6.47it/s, loss=0.322]
+Traceback (most recent call last):
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 314, in <module>
+    main()
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 310, in main
+    train(args=args, wandb= wandb)
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 238, in train
+    trainer.train(evaluator, chkpt_path=chkpt_path, image_dir=image_dir)
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/utils/train.py", line 230, in train
+    self.step(x.to(self.device), global_steps=global_steps)
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/utils/train.py", line 160, in step
+    self.wandb.log({"train_loss":loss})
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 420, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 371, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 361, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 1828, in log
+    self._log(data=data, step=step, commit=commit)
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 1596, in _log
+    self._partial_history_callback(data, step, commit)
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 1468, in _partial_history_callback
+    self._backend.interface.publish_partial_history(
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/sdk/interface/interface.py", line 570, in publish_partial_history
+    item.value_json = json_dumps_safer_history(v)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/util.py", line 839, in json_dumps_safer_history
+    return dumps(obj, cls=WandBHistoryJSONEncoder, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/util.py", line 800, in default
+    obj, converted = json_friendly(obj)
+                     ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/wandb/util.py", line 612, in json_friendly
+    return obj.item(), True
+           ^^^^^^^^^^
+KeyboardInterrupt

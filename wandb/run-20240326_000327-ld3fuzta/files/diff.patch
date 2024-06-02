@@ -1,0 +1,227 @@
+diff --git a/ddpm_torch/datasets.py b/ddpm_torch/datasets.py
+index c8c5fec..2be0939 100644
+--- a/ddpm_torch/datasets.py
++++ b/ddpm_torch/datasets.py
+@@ -59,7 +59,7 @@ class CIFAR10(tvds.CIFAR10):
+     test_size = 10000
+ 
+     def __init__(self, root, split="train", transform=None):
+-        super().__init__(root=root, train=split != "test", transform=transform or self._transform, download=False)
++        super().__init__(root=root, train=split != "test", transform=transform or self._transform, download=True)
+ 
+     def __getitem__(self, index):
+         return super().__getitem__(index)[0]
+diff --git a/ddpm_torch/diffusion.py b/ddpm_torch/diffusion.py
+index 7c62860..b9e8e5f 100644
+--- a/ddpm_torch/diffusion.py
++++ b/ddpm_torch/diffusion.py
+@@ -9,6 +9,10 @@ def _warmup_beta(beta_start, beta_end, timesteps, warmup_frac, dtype):
+     betas[:warmup_time] = torch.linspace(beta_start, beta_end, warmup_time, dtype=dtype)
+     return betas
+ 
++def extract(a, t, x_shape):
++    b, *_ = t.shape
++    out = a.gather(-1, t)
++    return out.reshape(b, *((1,) * (len(x_shape) - 1)))
+ 
+ def get_beta_schedule(beta_schedule, beta_start, beta_end, timesteps, dtype=torch.float64):
+     if beta_schedule == 'quad':
+@@ -196,7 +200,15 @@ class GaussianDiffusion:
+                 idx -= 1
+                 preds[idx] = pred.cpu()
+         return x_t.cpu(), preds
+-
++    
++
++    def eff_noise(self, t, noise, model_error):
++        error_eff_coeff  = (self.betas[1:]/self.betas[:-1])*(self.sqrt_one_minus_alphas_bar[:-1]/(self.sqrt_one_minus_alphas_bar[1:] *(1 - self.betas[1:]).sqrt()))
++        error_eff_coeff = torch.clamp(error_eff_coeff, max = 3)
++        delta_error = model_error - noise
++        effective_noise = self._extract(error_eff_coeff, t, noise)*delta_error + noise
++        return effective_noise
++    
+     # === log likelihood ===
+     # bpd: bits per dimension
+ 
+@@ -241,6 +253,16 @@ class GaussianDiffusion:
+             raise NotImplementedError(self.loss_type)
+ 
+         return losses
++    def train_errorlosses(self, denoise_fn, x_0, t, noise=None):
++        if noise is None:
++            noise = torch.randn_like(x_0)
++        x = self.q_sample(x_0 = x_0, t = t, noise = noise)
++        model_out = denoise_fn(x, t)
++        eff_noise = self.eff_noise(t-1, noise, model_out.detach_())
++        x_error = self.q_sample(x_0 = x_0, t = t-1, noise = eff_noise)
++        model_out_error = denoise_fn(x_error, t-1)
++        losses = flat_mean((eff_noise - model_out_error).pow(2))
++        return losses
+ 
+     def _prior_bpd(self, x_0):
+         B, T = len(x_0), self.timesteps
+diff --git a/ddpm_torch/utils/train.py b/ddpm_torch/utils/train.py
+index f0959cc..e988636 100644
+--- a/ddpm_torch/utils/train.py
++++ b/ddpm_torch/utils/train.py
+@@ -82,7 +82,9 @@ class Trainer:
+             ema_decay=0.9999,
+             distributed=False,
+             rank=0,  # process id for distributed training
+-            dry_run=False
++            dry_run=False, 
++            wandb = None,
++            train_error = False,
+     ):
+         self.model = model
+         self.optimizer = optimizer
+@@ -115,7 +117,8 @@ class Trainer:
+         self.generator = torch.Generator(device).manual_seed(8191 + self.rank)
+ 
+         self.sample_seed = 131071 + self.rank  # process-specific seed
+-
++        self.wandb = wandb
++        self.train_error = train_error
+         self.use_ema = use_ema
+         if use_ema:
+             if isinstance(model, DDP):
+@@ -144,12 +147,23 @@ class Trainer:
+         loss = self.diffusion.train_losses(self.model, **self.get_input(x))
+         assert loss.shape == (x.shape[0],)
+         return loss
++    def error_loss(self, x):
++        error_loss = self.diffusion.train_errorlosses(self.model, **self.get_input(x))
++        assert error_loss.shape == (x.shape[0],)
++        return error_loss
+ 
+     def step(self, x, global_steps=1):
+         # Note: For DDP models, the gradients collected from different devices are averaged rather than summed.
+         # See https://pytorch.org/docs/1.12/generated/torch.nn.parallel.DistributedDataParallel.html
+         # Mean-reduced loss should be used to avoid inconsistent learning rate issue when number of devices changes.
+         loss = self.loss(x).mean()
++        self.wandb.log({"train_loss":loss})
++        if self.train_error == True:
++            error_loss = self.error_loss(x).mean()
++            self.wandb.log({"train_errorloss":error_loss})
++            loss += error_loss
++
++        
+         loss.div(self.num_accum).backward()  # average over accumulated mini-batches
+         if global_steps % self.num_accum == 0:
+             # gradient clipping by global norm
+@@ -168,6 +182,7 @@ class Trainer:
+             dist.reduce(loss, dst=0, op=dist.ReduceOp.SUM)  # synchronize losses
+             loss.div_(self.world_size)
+         self.stats.update(x.shape[0], loss=loss.item() * x.shape[0])
++        return loss 
+ 
+     def sample_fn(self, sample_size=None, noise=None, diffusion=None, sample_seed=None):
+         if noise is None:
+diff --git a/train.py b/train.py
+index f290e5c..632548b 100644
+--- a/train.py
++++ b/train.py
+@@ -11,9 +11,9 @@ from functools import partial
+ from torch.distributed.elastic.multiprocessing import errors
+ from torch.nn.parallel import DistributedDataParallel as DDP  # noqa
+ from torch.optim import Adam, lr_scheduler
++from utils.wandb_init import init_wandb
+ 
+-
+-def train(rank=0, args=None, temp_dir=""):
++def train(rank=0, args=None, temp_dir="", wandb = None):
+     distributed = args.distributed
+ 
+     def logger(msg, **kwargs):
+@@ -43,6 +43,8 @@ def train(rank=0, args=None, temp_dir=""):
+         k: gettr(k) for k in (
+             "batch_size", "beta1", "beta2", "lr", "epochs", "grad_norm", "warmup",
+             "chkpt_intv", "image_intv", "num_samples", "use_ema", "ema_decay")})
++    
++    train_config.batch_size = 32 #HardCode
+     train_config.batch_size //= args.num_accum
+     train_device = torch.device(args.train_device)
+     eval_device = torch.device(args.eval_device)
+@@ -171,7 +173,7 @@ def train(rank=0, args=None, temp_dir=""):
+             json.dump(hps, f, indent=2)
+         if not os.path.exists(image_dir):
+             os.makedirs(image_dir)
+-
++    # print(train_config)
+     trainer = Trainer(
+         model=model,
+         optimizer=optimizer,
+@@ -191,7 +193,9 @@ def train(rank=0, args=None, temp_dir=""):
+         ema_decay=args.ema_decay,
+         rank=rank,
+         distributed=distributed,
+-        dry_run=args.dry_run
++        dry_run=args.dry_run, 
++        wandb = wandb,
++        train_error= args.train_error
+     )
+ 
+     if args.use_ddim:
+@@ -207,7 +211,8 @@ def train(rank=0, args=None, temp_dir=""):
+             diffusion=diffusion_eval,
+             eval_batch_size=args.eval_batch_size,
+             eval_total_size=args.eval_total_size,
+-            device=eval_device
++            device=eval_device, 
++            wandb = wandb
+         )
+     else:
+         evaluator = None
+@@ -245,7 +250,7 @@ def main():
+     parser.add_argument("--lr", default=0.0002, type=float, help="learning rate")
+     parser.add_argument("--beta1", default=0.9, type=float, help="beta_1 in Adam")
+     parser.add_argument("--beta2", default=0.999, type=float, help="beta_2 in Adam")
+-    parser.add_argument("--batch-size", default=128, type=int)
++    parser.add_argument("--batch-size", default=32, type=int)
+     parser.add_argument("--num-accum", default=1, type=int, help="number of mini-batches before an update")
+     parser.add_argument("--block-size", default=1, type=int, help="block size used for pixel shuffle")
+     parser.add_argument("--timesteps", default=1000, type=int, help="number of diffusion steps")
+@@ -260,17 +265,17 @@ def main():
+     parser.add_argument("--eval-device", default="cuda:0", type=str)
+     parser.add_argument("--image-dir", default="./images", type=str)
+     parser.add_argument("--image-intv", default=10, type=int)
+-    parser.add_argument("--num-samples", default=64, type=int, help="number of images to sample and save")
++    parser.add_argument("--num-samples", default=32, type=int, help="number of images to sample and save")
+     parser.add_argument("--config-dir", default="./configs", type=str)
+     parser.add_argument("--chkpt-dir", default="./chkpts", type=str)
+     parser.add_argument("--chkpt-name", default="", type=str)
+-    parser.add_argument("--chkpt-intv", default=120, type=int, help="frequency of saving a checkpoint")
++    parser.add_argument("--chkpt-intv", default=10, type=int, help="frequency of saving a checkpoint")
+     parser.add_argument("--seed", default=1234, type=int, help="random seed")
+     parser.add_argument("--resume", action="store_true", help="to resume training from a checkpoint")
+     parser.add_argument("--chkpt-path", default="", type=str, help="checkpoint path used to resume training")
+     parser.add_argument("--eval", action="store_true", help="whether to evaluate fid during training")
+     parser.add_argument("--eval-total-size", default=50000, type=int)
+-    parser.add_argument("--eval-batch-size", default=256, type=int)
++    parser.add_argument("--eval-batch-size", default=32, type=int)
+     parser.add_argument("--use-ema", action="store_true", help="whether to use exponential moving average")
+     parser.add_argument("--use-ddim", action="store_true", help="whether to use DDIM sampler for evaluation")
+     parser.add_argument("--skip-schedule", choices=["linear", "quadratic"], default="linear", type=str)
+@@ -280,9 +285,12 @@ def main():
+     parser.add_argument("--rigid-launch", action="store_true", help="whether to use torch multiprocessing spawn")
+     parser.add_argument("--num-gpus", default=1, type=int, help="number of gpus for distributed training")
+     parser.add_argument("--dry-run", action="store_true", help="test-run till the first model update completes")
++    parser.add_argument("--train_error", action="store_true", help="train_error")
+ 
+-    args = parser.parse_args()
+ 
++    args = parser.parse_args()
++    # print(train_error, args)
++    wandb = init_wandb(proj_name = "diffusion_research", config = args, name = "")
+     if args.distributed and args.rigid_launch:
+         mp.set_start_method("spawn")
+         with tempfile.TemporaryDirectory() as temp_dir:
+@@ -298,7 +306,7 @@ def main():
+           4. uses TCP initialization by default
+         **5. supports multi-node training
+         """
+-        train(args=args)
++        train(args=args, wandb= wandb)
+ 
+ 
+ if __name__ == "__main__":

@@ -1,0 +1,38 @@
+Dataset: cifar10
+Effective batch-size is 32 * 1 = 32.
+Files already downloaded and verified
+Checkpoint will be saved to /home/evan0830/diffusion/ddpm-torch/chkpts/cifar10/cifar10.pt every 10 epoch(s)
+Generated images (x32) will be saved to /home/evan0830/diffusion/ddpm-torch/images/train/cifar10 every 10 epoch(s)
+cuDNN benchmark: ON
+Training starts...
+1/2040 epochs:   0%|                                                                                                     | 0/1562 [00:00<?, ?it/s]
+
+1/2040 epochs:   0%|                                                                               | 1/1562 [00:03<1:31:04,  3.50s/it, loss=0.999]
+True
+True
+True
+True
+True
+True
+1/2040 epochs:   1%|▍                                                                                    | 8/1562 [00:05<17:39,  1.47it/s, loss=1]
+Traceback (most recent call last):
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 313, in <module>
+    main()
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 309, in main
+    train(args=args, wandb= wandb)
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 237, in train
+    trainer.train(evaluator, chkpt_path=chkpt_path, image_dir=image_dir)
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/utils/train.py", line 227, in train
+    self.step(x.to(self.device), global_steps=global_steps)
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/utils/train.py", line 168, in step
+    loss.div(self.num_accum).backward()  # average over accumulated mini-batches
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/_tensor.py", line 522, in backward
+    torch.autograd.backward(
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/autograd/__init__.py", line 266, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+True

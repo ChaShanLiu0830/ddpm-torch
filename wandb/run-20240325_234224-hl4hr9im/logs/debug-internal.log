@@ -1,0 +1,212 @@
+2024-03-25 23:42:24,403 INFO    StreamThr :643204 [internal.py:wandb_internal():86] W&B internal server running at pid: 643204, started at: 2024-03-25 23:42:24.403065
+2024-03-25 23:42:24,405 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: status
+2024-03-25 23:42:24,406 INFO    WriterThread:643204 [datastore.py:open_for_write():87] open: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/run-hl4hr9im.wandb
+2024-03-25 23:42:24,408 DEBUG   SenderThread:643204 [sender.py:send():382] send: header
+2024-03-25 23:42:24,409 DEBUG   SenderThread:643204 [sender.py:send():382] send: run
+2024-03-25 23:42:24,882 INFO    SenderThread:643204 [dir_watcher.py:__init__():211] watching files in: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files
+2024-03-25 23:42:24,882 INFO    SenderThread:643204 [sender.py:_start_run_threads():1136] run started: hl4hr9im with start time 1711381344.403015
+2024-03-25 23:42:24,897 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: check_version
+2024-03-25 23:42:24,897 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: check_version
+2024-03-25 23:42:25,105 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: run_start
+2024-03-25 23:42:25,134 DEBUG   HandlerThread:643204 [system_info.py:__init__():27] System info init
+2024-03-25 23:42:25,134 DEBUG   HandlerThread:643204 [system_info.py:__init__():42] System info init done
+2024-03-25 23:42:25,134 INFO    HandlerThread:643204 [system_monitor.py:start():194] Starting system monitor
+2024-03-25 23:42:25,134 INFO    SystemMonitor:643204 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-03-25 23:42:25,135 INFO    HandlerThread:643204 [system_monitor.py:probe():214] Collecting system info
+2024-03-25 23:42:25,136 INFO    SystemMonitor:643204 [interfaces.py:start():190] Started cpu monitoring
+2024-03-25 23:42:25,136 INFO    SystemMonitor:643204 [interfaces.py:start():190] Started disk monitoring
+2024-03-25 23:42:25,137 INFO    SystemMonitor:643204 [interfaces.py:start():190] Started gpu monitoring
+2024-03-25 23:42:25,137 INFO    SystemMonitor:643204 [interfaces.py:start():190] Started memory monitoring
+2024-03-25 23:42:25,139 INFO    SystemMonitor:643204 [interfaces.py:start():190] Started network monitoring
+2024-03-25 23:42:25,165 DEBUG   HandlerThread:643204 [system_info.py:probe():151] Probing system
+2024-03-25 23:42:25,167 DEBUG   HandlerThread:643204 [system_info.py:_probe_git():136] Probing git
+2024-03-25 23:42:25,172 DEBUG   HandlerThread:643204 [system_info.py:_probe_git():144] Probing git done
+2024-03-25 23:42:25,172 DEBUG   HandlerThread:643204 [system_info.py:probe():199] Probing system done
+2024-03-25 23:42:25,172 DEBUG   HandlerThread:643204 [system_monitor.py:probe():223] {'os': 'Linux-5.15.0-84-generic-x86_64-with-glibc2.31', 'python': '3.11.7', 'heartbeatAt': '2024-03-25T15:42:25.165605', 'startedAt': '2024-03-25T15:42:24.399457', 'docker': None, 'cuda': None, 'args': ('--dataset', 'cifar10', '--train-device', 'cuda:0', '--epochs', '50', '--train_error'), 'state': 'running', 'program': '/home/evan0830/diffusion/ddpm-torch/train.py', 'codePathLocal': 'train.py', 'codePath': 'train.py', 'git': {'remote': 'git@github.com:ChaShanLiu0830/ddpm-torch.git', 'commit': '9879834ed0a3549152b62697ae268c3026698eed'}, 'email': 'evan0830@gmail.com', 'root': '/home/evan0830/diffusion/ddpm-torch', 'host': 'user', 'username': 'evan0830', 'executable': '/home/evan0830/miniconda3/envs/diffusion/bin/python', 'cpu_count': 10, 'cpu_count_logical': 20, 'cpu_freq': {'current': 3.8131999999999997, 'min': 1200.0, 'max': 4560.0}, 'cpu_freq_per_core': [{'current': 3.969, 'min': 1200.0, 'max': 4700.0}, {'current': 4.029, 'min': 1200.0, 'max': 4700.0}, {'current': 3.721, 'min': 1200.0, 'max': 4500.0}, {'current': 3.998, 'min': 1200.0, 'max': 4500.0}, {'current': 3.7, 'min': 1200.0, 'max': 4500.0}, {'current': 3.68, 'min': 1200.0, 'max': 4500.0}, {'current': 3.988, 'min': 1200.0, 'max': 4600.0}, {'current': 4.052, 'min': 1200.0, 'max': 4600.0}, {'current': 3.035, 'min': 1200.0, 'max': 4500.0}, {'current': 3.7, 'min': 1200.0, 'max': 4500.0}, {'current': 3.925, 'min': 1200.0, 'max': 4700.0}, {'current': 3.7, 'min': 1200.0, 'max': 4700.0}, {'current': 3.7, 'min': 1200.0, 'max': 4500.0}, {'current': 3.933, 'min': 1200.0, 'max': 4500.0}, {'current': 3.7, 'min': 1200.0, 'max': 4500.0}, {'current': 3.7, 'min': 1200.0, 'max': 4500.0}, {'current': 3.7, 'min': 1200.0, 'max': 4600.0}, {'current': 3.7, 'min': 1200.0, 'max': 4600.0}, {'current': 3.7, 'min': 1200.0, 'max': 4500.0}, {'current': 3.7, 'min': 1200.0, 'max': 4500.0}], 'disk': {'/': {'total': 915.3232879638672, 'used': 786.3328018188477}}, 'gpu': 'NVIDIA GeForce RTX 3080 Ti', 'gpu_count': 2, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3080 Ti', 'memory_total': 12884901888}, {'name': 'NVIDIA GeForce RTX 3080 Ti', 'memory_total': 12884901888}], 'memory': {'total': 125.47943496704102}}
+2024-03-25 23:42:25,172 INFO    HandlerThread:643204 [system_monitor.py:probe():224] Finished collecting system info
+2024-03-25 23:42:25,172 INFO    HandlerThread:643204 [system_monitor.py:probe():227] Publishing system info
+2024-03-25 23:42:25,172 DEBUG   HandlerThread:643204 [system_info.py:_save_conda():208] Saving list of conda packages installed into the current environment
+2024-03-25 23:42:25,883 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_created():271] file/dir created: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/conda-environment.yaml
+2024-03-25 23:42:27,493 DEBUG   HandlerThread:643204 [system_info.py:_save_conda():220] Saving conda packages done
+2024-03-25 23:42:27,493 DEBUG   HandlerThread:643204 [system_info.py:_save_code():45] Saving code
+2024-03-25 23:42:27,495 DEBUG   HandlerThread:643204 [system_info.py:_save_code():66] Saving code done
+2024-03-25 23:42:27,495 DEBUG   HandlerThread:643204 [system_info.py:_save_patches():83] Saving git patches
+2024-03-25 23:42:27,516 DEBUG   HandlerThread:643204 [system_info.py:_save_patches():125] Saving git patches done
+2024-03-25 23:42:27,516 INFO    HandlerThread:643204 [system_monitor.py:probe():229] Finished publishing system info
+2024-03-25 23:42:27,518 DEBUG   SenderThread:643204 [sender.py:send():382] send: files
+2024-03-25 23:42:27,518 INFO    SenderThread:643204 [sender.py:_save_file():1403] saving file wandb-metadata.json with policy now
+2024-03-25 23:42:27,518 INFO    SenderThread:643204 [sender.py:_save_file():1403] saving file code/train.py with policy now
+2024-03-25 23:42:27,519 INFO    SenderThread:643204 [sender.py:_save_file():1403] saving file diff.patch with policy now
+2024-03-25 23:42:27,523 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: python_packages
+2024-03-25 23:42:27,524 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-25 23:42:27,524 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-25 23:42:27,526 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: python_packages
+2024-03-25 23:42:27,527 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: stop_status
+2024-03-25 23:42:27,853 DEBUG   SenderThread:643204 [sender.py:send():382] send: telemetry
+2024-03-25 23:42:27,883 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/conda-environment.yaml
+2024-03-25 23:42:27,884 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_created():271] file/dir created: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/code/train.py
+2024-03-25 23:42:27,884 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_created():271] file/dir created: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/wandb-metadata.json
+2024-03-25 23:42:27,884 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_created():271] file/dir created: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/diff.patch
+2024-03-25 23:42:27,884 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_created():271] file/dir created: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/requirements.txt
+2024-03-25 23:42:27,885 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_created():271] file/dir created: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/code
+2024-03-25 23:42:28,225 INFO    wandb-upload_0:643204 [upload_job.py:push():131] Uploaded file /tmp/tmppaxf9cbhwandb/el291vv0-wandb-metadata.json
+2024-03-25 23:42:28,372 INFO    wandb-upload_1:643204 [upload_job.py:push():131] Uploaded file /tmp/tmppaxf9cbhwandb/x0h6lj04-code/train.py
+2024-03-25 23:42:28,381 INFO    wandb-upload_2:643204 [upload_job.py:push():131] Uploaded file /tmp/tmppaxf9cbhwandb/oi79jz98-diff.patch
+2024-03-25 23:42:28,884 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_created():271] file/dir created: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/output.log
+2024-03-25 23:42:29,789 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: status_report
+2024-03-25 23:42:30,365 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-25 23:42:30,366 DEBUG   SenderThread:643204 [sender.py:send():382] send: history
+2024-03-25 23:42:30,367 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: summary_record
+2024-03-25 23:42:30,367 INFO    SenderThread:643204 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-03-25 23:42:30,721 DEBUG   SenderThread:643204 [sender.py:send():382] send: exit
+2024-03-25 23:42:30,721 INFO    SenderThread:643204 [sender.py:send_exit():589] handling exit code: 1
+2024-03-25 23:42:30,721 INFO    SenderThread:643204 [sender.py:send_exit():591] handling runtime: 5
+2024-03-25 23:42:30,721 INFO    SenderThread:643204 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-03-25 23:42:30,722 INFO    SenderThread:643204 [sender.py:send_exit():597] send defer
+2024-03-25 23:42:30,722 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:30,722 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 0
+2024-03-25 23:42:30,722 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:30,722 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 0
+2024-03-25 23:42:30,722 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 1
+2024-03-25 23:42:30,722 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:30,722 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 1
+2024-03-25 23:42:30,722 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:30,722 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 1
+2024-03-25 23:42:30,722 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 2
+2024-03-25 23:42:30,722 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:30,722 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 2
+2024-03-25 23:42:30,722 INFO    HandlerThread:643204 [system_monitor.py:finish():203] Stopping system monitor
+2024-03-25 23:42:30,722 DEBUG   SystemMonitor:643204 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-03-25 23:42:30,723 DEBUG   SystemMonitor:643204 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-03-25 23:42:30,723 DEBUG   SystemMonitor:643204 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-03-25 23:42:30,723 INFO    HandlerThread:643204 [interfaces.py:finish():202] Joined cpu monitor
+2024-03-25 23:42:30,723 INFO    HandlerThread:643204 [interfaces.py:finish():202] Joined disk monitor
+2024-03-25 23:42:30,884 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/output.log
+2024-03-25 23:42:30,885 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_created():271] file/dir created: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/wandb-summary.json
+2024-03-25 23:42:30,941 INFO    HandlerThread:643204 [interfaces.py:finish():202] Joined gpu monitor
+2024-03-25 23:42:30,942 INFO    HandlerThread:643204 [interfaces.py:finish():202] Joined memory monitor
+2024-03-25 23:42:30,942 INFO    HandlerThread:643204 [interfaces.py:finish():202] Joined network monitor
+2024-03-25 23:42:30,942 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:30,942 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 2
+2024-03-25 23:42:30,942 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 3
+2024-03-25 23:42:30,942 DEBUG   SenderThread:643204 [sender.py:send():382] send: stats
+2024-03-25 23:42:30,942 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:30,943 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 3
+2024-03-25 23:42:30,943 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:30,943 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 3
+2024-03-25 23:42:30,943 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 4
+2024-03-25 23:42:30,943 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:30,943 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 4
+2024-03-25 23:42:30,943 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:30,943 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 4
+2024-03-25 23:42:30,943 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 5
+2024-03-25 23:42:30,943 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:30,943 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 5
+2024-03-25 23:42:30,944 DEBUG   SenderThread:643204 [sender.py:send():382] send: summary
+2024-03-25 23:42:30,944 INFO    SenderThread:643204 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-03-25 23:42:30,944 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:30,944 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 5
+2024-03-25 23:42:30,944 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 6
+2024-03-25 23:42:30,944 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:30,944 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 6
+2024-03-25 23:42:30,944 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:30,944 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 6
+2024-03-25 23:42:30,947 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: status_report
+2024-03-25 23:42:31,164 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 7
+2024-03-25 23:42:31,165 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:31,165 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 7
+2024-03-25 23:42:31,165 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:31,165 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 7
+2024-03-25 23:42:31,720 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-25 23:42:31,885 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/config.yaml
+2024-03-25 23:42:31,885 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/wandb-summary.json
+2024-03-25 23:42:32,793 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 8
+2024-03-25 23:42:32,793 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: poll_exit
+2024-03-25 23:42:32,793 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:32,793 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 8
+2024-03-25 23:42:32,794 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:32,794 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 8
+2024-03-25 23:42:32,794 INFO    SenderThread:643204 [job_builder.py:build():296] Attempting to build job artifact
+2024-03-25 23:42:32,794 INFO    SenderThread:643204 [job_builder.py:_get_source_type():426] is repo sourced job
+2024-03-25 23:42:32,813 INFO    SenderThread:643204 [job_builder.py:build():402] adding wandb-job metadata file
+2024-03-25 23:42:32,816 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 9
+2024-03-25 23:42:32,817 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:32,817 DEBUG   SenderThread:643204 [sender.py:send():382] send: artifact
+2024-03-25 23:42:32,817 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 9
+2024-03-25 23:42:32,885 INFO    Thread-12 :643204 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/output.log
+2024-03-25 23:42:33,721 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-25 23:42:34,137 INFO    wandb-upload_1:643204 [upload_job.py:push():86] Skipped uploading /home/evan0830/.local/share/wandb/artifacts/staging/tmpzpdvo5_t
+2024-03-25 23:42:34,137 INFO    wandb-upload_2:643204 [upload_job.py:push():86] Skipped uploading /home/evan0830/.local/share/wandb/artifacts/staging/tmpa89fx4g3
+2024-03-25 23:42:34,573 INFO    wandb-upload_0:643204 [upload_job.py:push():89] Uploaded file /home/evan0830/.local/share/wandb/artifacts/staging/tmpq6ne9c45
+2024-03-25 23:42:35,883 INFO    SenderThread:643204 [sender.py:send_artifact():1494] sent artifact job-git_github.com_ChaShanLiu0830_ddpm-torch.git_train.py - {'id': 'QXJ0aWZhY3Q6NzcwMDgyMjM1', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjE1MjMxNDU5MA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NzcwMDczOTg5', 'versionIndex': 3}}}
+2024-03-25 23:42:35,883 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:35,883 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 9
+2024-03-25 23:42:35,884 INFO    SenderThread:643204 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-03-25 23:42:35,886 INFO    SenderThread:643204 [dir_watcher.py:finish():388] scan: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files
+2024-03-25 23:42:35,886 INFO    SenderThread:643204 [dir_watcher.py:finish():402] scan save: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/requirements.txt requirements.txt
+2024-03-25 23:42:35,886 INFO    SenderThread:643204 [dir_watcher.py:finish():402] scan save: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/conda-environment.yaml conda-environment.yaml
+2024-03-25 23:42:35,886 INFO    SenderThread:643204 [dir_watcher.py:finish():402] scan save: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/wandb-summary.json wandb-summary.json
+2024-03-25 23:42:35,887 INFO    SenderThread:643204 [dir_watcher.py:finish():402] scan save: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/wandb-metadata.json wandb-metadata.json
+2024-03-25 23:42:35,887 INFO    SenderThread:643204 [dir_watcher.py:finish():402] scan save: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/output.log output.log
+2024-03-25 23:42:35,891 INFO    SenderThread:643204 [dir_watcher.py:finish():402] scan save: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/config.yaml config.yaml
+2024-03-25 23:42:35,893 INFO    SenderThread:643204 [dir_watcher.py:finish():402] scan save: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/diff.patch diff.patch
+2024-03-25 23:42:35,895 INFO    SenderThread:643204 [dir_watcher.py:finish():402] scan save: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/code/train.py code/train.py
+2024-03-25 23:42:35,895 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 10
+2024-03-25 23:42:35,895 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: poll_exit
+2024-03-25 23:42:35,895 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:35,895 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 10
+2024-03-25 23:42:35,896 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:35,896 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 10
+2024-03-25 23:42:35,896 INFO    SenderThread:643204 [file_pusher.py:finish():172] shutting down file pusher
+2024-03-25 23:42:36,339 INFO    wandb-upload_0:643204 [upload_job.py:push():131] Uploaded file /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/wandb-summary.json
+2024-03-25 23:42:36,339 INFO    wandb-upload_3:643204 [upload_job.py:push():131] Uploaded file /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/output.log
+2024-03-25 23:42:36,358 INFO    wandb-upload_1:643204 [upload_job.py:push():131] Uploaded file /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/requirements.txt
+2024-03-25 23:42:36,398 INFO    wandb-upload_2:643204 [upload_job.py:push():131] Uploaded file /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/conda-environment.yaml
+2024-03-25 23:42:36,463 INFO    wandb-upload_4:643204 [upload_job.py:push():131] Uploaded file /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/files/config.yaml
+2024-03-25 23:42:36,663 INFO    Thread-11 (_thread_body):643204 [sender.py:transition_state():617] send defer: 11
+2024-03-25 23:42:36,664 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:36,664 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 11
+2024-03-25 23:42:36,664 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:36,664 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 11
+2024-03-25 23:42:36,664 INFO    SenderThread:643204 [file_pusher.py:join():178] waiting for file pusher
+2024-03-25 23:42:36,665 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 12
+2024-03-25 23:42:36,665 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:36,665 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 12
+2024-03-25 23:42:36,665 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:36,665 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 12
+2024-03-25 23:42:36,665 INFO    SenderThread:643204 [file_stream.py:finish():595] file stream finish called
+2024-03-25 23:42:36,722 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-25 23:42:36,838 INFO    SenderThread:643204 [file_stream.py:finish():599] file stream finish is done
+2024-03-25 23:42:36,838 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 13
+2024-03-25 23:42:36,838 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: poll_exit
+2024-03-25 23:42:36,838 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:36,839 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 13
+2024-03-25 23:42:36,839 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:36,839 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 13
+2024-03-25 23:42:36,839 INFO    SenderThread:643204 [sender.py:transition_state():617] send defer: 14
+2024-03-25 23:42:36,839 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: defer
+2024-03-25 23:42:36,839 DEBUG   SenderThread:643204 [sender.py:send():382] send: final
+2024-03-25 23:42:36,839 INFO    HandlerThread:643204 [handler.py:handle_request_defer():172] handle defer: 14
+2024-03-25 23:42:36,839 DEBUG   SenderThread:643204 [sender.py:send():382] send: footer
+2024-03-25 23:42:36,839 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: defer
+2024-03-25 23:42:36,839 INFO    SenderThread:643204 [sender.py:send_request_defer():613] handle sender defer: 14
+2024-03-25 23:42:36,840 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-25 23:42:36,840 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: poll_exit
+2024-03-25 23:42:36,840 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-25 23:42:36,840 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: poll_exit
+2024-03-25 23:42:36,841 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: server_info
+2024-03-25 23:42:36,841 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: get_summary
+2024-03-25 23:42:36,841 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: sampled_history
+2024-03-25 23:42:36,841 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-25 23:42:36,842 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: server_info
+2024-03-25 23:42:36,843 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: job_info
+2024-03-25 23:42:37,034 DEBUG   SenderThread:643204 [sender.py:send_request():409] send_request: job_info
+2024-03-25 23:42:37,035 INFO    MainThread:643204 [wandb_run.py:_footer_history_summary_info():3866] rendering history
+2024-03-25 23:42:37,035 INFO    MainThread:643204 [wandb_run.py:_footer_history_summary_info():3898] rendering summary
+2024-03-25 23:42:37,035 INFO    MainThread:643204 [wandb_run.py:_footer_sync_info():3825] logging synced files
+2024-03-25 23:42:37,035 DEBUG   HandlerThread:643204 [handler.py:handle_request():146] handle_request: shutdown
+2024-03-25 23:42:37,035 INFO    HandlerThread:643204 [handler.py:finish():869] shutting down handler
+2024-03-25 23:42:37,844 INFO    WriterThread:643204 [datastore.py:close():296] close: /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234224-hl4hr9im/run-hl4hr9im.wandb
+2024-03-25 23:42:38,035 INFO    SenderThread:643204 [sender.py:finish():1572] shutting down sender
+2024-03-25 23:42:38,035 INFO    SenderThread:643204 [file_pusher.py:finish():172] shutting down file pusher
+2024-03-25 23:42:38,035 INFO    SenderThread:643204 [file_pusher.py:join():178] waiting for file pusher

@@ -1,0 +1,161 @@
+wandb_version: 1
+
+config_path:
+  desc: null
+  value: null
+exp_name:
+  desc: null
+  value: null
+dataset:
+  desc: null
+  value: cifar10
+root:
+  desc: null
+  value: ~/datasets
+epochs:
+  desc: null
+  value: 50
+lr:
+  desc: null
+  value: 0.0002
+beta1:
+  desc: null
+  value: 0.9
+beta2:
+  desc: null
+  value: 0.999
+batch_size:
+  desc: null
+  value: 32
+num_accum:
+  desc: null
+  value: 1
+block_size:
+  desc: null
+  value: 1
+timesteps:
+  desc: null
+  value: 1000
+beta_schedule:
+  desc: null
+  value: linear
+beta_start:
+  desc: null
+  value: 0.0001
+beta_end:
+  desc: null
+  value: 0.02
+model_mean_type:
+  desc: null
+  value: eps
+model_var_type:
+  desc: null
+  value: fixed-large
+loss_type:
+  desc: null
+  value: mse
+num_workers:
+  desc: null
+  value: 4
+train_device:
+  desc: null
+  value: cuda:0
+eval_device:
+  desc: null
+  value: cuda:0
+image_dir:
+  desc: null
+  value: ./images
+image_intv:
+  desc: null
+  value: 10
+num_samples:
+  desc: null
+  value: 32
+config_dir:
+  desc: null
+  value: ./configs
+chkpt_dir:
+  desc: null
+  value: ./chkpts
+chkpt_name:
+  desc: null
+  value: ''
+chkpt_intv:
+  desc: null
+  value: 10
+seed:
+  desc: null
+  value: 1234
+resume:
+  desc: null
+  value: false
+chkpt_path:
+  desc: null
+  value: ''
+eval:
+  desc: null
+  value: false
+eval_total_size:
+  desc: null
+  value: 50000
+eval_batch_size:
+  desc: null
+  value: 32
+use_ema:
+  desc: null
+  value: false
+use_ddim:
+  desc: null
+  value: false
+skip_schedule:
+  desc: null
+  value: linear
+subseq_size:
+  desc: null
+  value: 50
+ema_decay:
+  desc: null
+  value: 0.9999
+distributed:
+  desc: null
+  value: false
+rigid_launch:
+  desc: null
+  value: false
+num_gpus:
+  desc: null
+  value: 1
+dry_run:
+  desc: null
+  value: false
+train_error:
+  desc: null
+  value: false
+_wandb:
+  desc: null
+  value:
+    code_path: code/train.py
+    python_version: 3.11.7
+    cli_version: 0.16.3
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1711385156.180342
+    t:
+      1:
+      - 1
+      - 41
+      - 55
+      2:
+      - 1
+      - 41
+      - 55
+      3:
+      - 16
+      - 23
+      4: 3.11.7
+      5: 0.16.3
+      8:
+      - 5
+      13: linux-x86_64

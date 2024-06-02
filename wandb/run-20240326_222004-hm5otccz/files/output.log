@@ -1,0 +1,57 @@
+Dataset: cifar10
+Effective batch-size is 32 * 1 = 32.
+Files already downloaded and verified
+Checkpoint will be saved to /home/evan0830/diffusion/ddpm-torch/chkpts/cifar10/cifar10.pt every 10 epoch(s)
+Generated images (x32) will be saved to /home/evan0830/diffusion/ddpm-torch/images/train/cifar10 every 10 epoch(s)
+Traceback (most recent call last):
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 313, in <module>
+    main()
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 309, in main
+    train(args=args, wandb= wandb)
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 209, in train
+    evaluator = Evaluator(
+                ^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/metrics/__init__.py", line 34, in __init__
+    self.target_mean, self.target_var = get_precomputed(dataset)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/ddpm_torch/metrics/fid_score.py", line 173, in get_precomputed
+    r = requests.get(url, timeout=120)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/requests/sessions.py", line 747, in send
+    r.content
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/requests/models.py", line 899, in content
+    self._content = b"".join(self.iter_content(CONTENT_CHUNK_SIZE)) or b""
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/requests/models.py", line 816, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/urllib3/response.py", line 934, in stream
+    data = self.read(amt=amt, decode_content=decode_content)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/urllib3/response.py", line 877, in read
+    data = self._raw_read(amt)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/urllib3/response.py", line 812, in _raw_read
+    data = self._fp_read(amt) if not fp_closed else b""
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/urllib3/response.py", line 797, in _fp_read
+    return self._fp.read(amt) if amt is not None else self._fp.read()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/http/client.py", line 473, in read
+    s = self.fp.read(amt)
+        ^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

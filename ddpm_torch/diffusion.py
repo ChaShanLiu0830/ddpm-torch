@@ -9,6 +9,10 @@ def _warmup_beta(beta_start, beta_end, timesteps, warmup_frac, dtype):
     betas[:warmup_time] = torch.linspace(beta_start, beta_end, warmup_time, dtype=dtype)
     return betas
 
+def extract(a, t, x_shape):
+    b, *_ = t.shape
+    out = a.gather(-1, t)
+    return out.reshape(b, *((1,) * (len(x_shape) - 1)))
 
 def get_beta_schedule(beta_schedule, beta_start, beta_end, timesteps, dtype=torch.float64):
     if beta_schedule == 'quad':
@@ -196,7 +200,15 @@ class GaussianDiffusion:
                 idx -= 1
                 preds[idx] = pred.cpu()
         return x_t.cpu(), preds
+    
 
+    def eff_noise(self, t, noise, model_error):
+        error_eff_coeff  = (self.betas[1:]/self.betas[:-1])*(self.sqrt_one_minus_alphas_bar[:-1]/(self.sqrt_one_minus_alphas_bar[1:] *(1 - self.betas[1:]).sqrt()))
+        error_eff_coeff = torch.clamp(error_eff_coeff, max = 3)
+        delta_error = model_error - noise
+        effective_noise = self._extract(error_eff_coeff, t, noise)*delta_error + noise
+        return effective_noise
+    
     # === log likelihood ===
     # bpd: bits per dimension
 
@@ -240,6 +252,17 @@ class GaussianDiffusion:
         else:
             raise NotImplementedError(self.loss_type)
 
+        return losses
+    def train_errorlosses(self, denoise_fn, x_0, t, noise=None):
+        t[t==0] = 1
+        if noise is None:
+            noise = torch.randn_like(x_0)
+        x = self.q_sample(x_0 = x_0, t = t, noise = noise)
+        model_out = denoise_fn(x, t)
+        eff_noise = self.eff_noise(t-1, noise, model_out.detach_())
+        x_error = self.q_sample(x_0 = x_0, t = t-1, noise = eff_noise)
+        model_out_error = denoise_fn(x_error, t-1)
+        losses = flat_mean((eff_noise - model_out_error).pow(2))
         return losses
 
     def _prior_bpd(self, x_0):

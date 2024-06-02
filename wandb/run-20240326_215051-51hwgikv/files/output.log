@@ -1,0 +1,17 @@
+Dataset: cifar10
+Effective batch-size is 32 * 1 = 32.
+Files already downloaded and verified
+Checkpoint will be saved to /home/evan0830/diffusion/ddpm-torch/chkpts/cifar10/cifar10.pt every 10 epoch(s)
+Generated images (x32) will be saved to /home/evan0830/diffusion/ddpm-torch/images/train/cifar10 every 10 epoch(s)
+Traceback (most recent call last):
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 313, in <module>
+    main()
+  File "/home/evan0830/miniconda3/envs/diffusion/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 309, in main
+    train(args=args, wandb= wandb)
+  File "/home/evan0830/diffusion/ddpm-torch/train.py", line 209, in train
+    evaluator = Evaluator(
+                ^^^^^^^^^^
+TypeError: Evaluator.__init__() got an unexpected keyword argument 'wandb'

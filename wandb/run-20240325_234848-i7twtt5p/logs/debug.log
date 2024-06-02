@@ -1,0 +1,28 @@
+2024-03-25 23:48:48,566 INFO    MainThread:646592 [wandb_setup.py:_flush():76] Current SDK version is 0.16.3
+2024-03-25 23:48:48,566 INFO    MainThread:646592 [wandb_setup.py:_flush():76] Configure stats pid to 646592
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_setup.py:_flush():76] Loading settings from /home/evan0830/.config/wandb/settings
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_setup.py:_flush():76] Loading settings from /home/evan0830/diffusion/ddpm-torch/wandb/settings
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train.py', 'program_abspath': '/home/evan0830/diffusion/ddpm-torch/train.py', 'program': '/home/evan0830/diffusion/ddpm-torch/train.py'}
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_init.py:_log_setup():526] Logging user logs to /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234848-i7twtt5p/logs/debug.log
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_init.py:_log_setup():527] Logging internal logs to /home/evan0830/diffusion/ddpm-torch/wandb/run-20240325_234848-i7twtt5p/logs/debug-internal.log
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_init.py:init():566] calling init triggers
+2024-03-25 23:48:48,567 INFO    MainThread:646592 [wandb_init.py:init():573] wandb.init called with sweep_config: {}
+config: {'config_path': None, 'exp_name': None, 'dataset': 'cifar10', 'root': '~/datasets', 'epochs': 50, 'lr': 0.0002, 'beta1': 0.9, 'beta2': 0.999, 'batch_size': 32, 'num_accum': 1, 'block_size': 1, 'timesteps': 1000, 'beta_schedule': 'linear', 'beta_start': 0.0001, 'beta_end': 0.02, 'model_mean_type': 'eps', 'model_var_type': 'fixed-large', 'loss_type': 'mse', 'num_workers': 4, 'train_device': 'cuda:0', 'eval_device': 'cuda:0', 'image_dir': './images', 'image_intv': 10, 'num_samples': 32, 'config_dir': './configs', 'chkpt_dir': './chkpts', 'chkpt_name': '', 'chkpt_intv': 10, 'seed': 1234, 'resume': False, 'chkpt_path': '', 'eval': False, 'eval_total_size': 50000, 'eval_batch_size': 32, 'use_ema': False, 'use_ddim': False, 'skip_schedule': 'linear', 'subseq_size': 50, 'ema_decay': 0.9999, 'distributed': False, 'rigid_launch': False, 'num_gpus': 1, 'dry_run': False, 'train_error': True}
+2024-03-25 23:48:48,568 INFO    MainThread:646592 [wandb_init.py:init():616] starting backend
+2024-03-25 23:48:48,568 INFO    MainThread:646592 [wandb_init.py:init():620] setting up manager
+2024-03-25 23:48:48,569 INFO    MainThread:646592 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-03-25 23:48:48,571 INFO    MainThread:646592 [wandb_init.py:init():628] backend started and connected
+2024-03-25 23:48:48,576 INFO    MainThread:646592 [wandb_init.py:init():720] updated telemetry
+2024-03-25 23:48:48,580 INFO    MainThread:646592 [wandb_init.py:init():753] communicating run to backend with 90.0 second timeout
+2024-03-25 23:48:49,089 INFO    MainThread:646592 [wandb_run.py:_on_init():2262] communicating current version
+2024-03-25 23:48:49,299 INFO    MainThread:646592 [wandb_run.py:_on_init():2271] got version response upgrade_message: "wandb version 0.16.4 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-03-25 23:48:49,299 INFO    MainThread:646592 [wandb_init.py:init():804] starting run threads in backend
+2024-03-25 23:48:51,674 INFO    MainThread:646592 [wandb_run.py:_console_start():2241] atexit reg
+2024-03-25 23:48:51,674 INFO    MainThread:646592 [wandb_run.py:_redirect():2096] redirect: wrap_raw
+2024-03-25 23:48:51,674 INFO    MainThread:646592 [wandb_run.py:_redirect():2161] Wrapping output streams.
+2024-03-25 23:48:51,674 INFO    MainThread:646592 [wandb_run.py:_redirect():2186] Redirects installed.
+2024-03-25 23:48:51,675 INFO    MainThread:646592 [wandb_init.py:init():847] run started, returning control to user process
+2024-03-25 23:49:07,874 WARNING MsgRouterThr:646592 [router.py:message_loop():77] message_loop has been closed

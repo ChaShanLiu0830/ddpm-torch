@@ -82,7 +82,9 @@ class Trainer:
             ema_decay=0.9999,
             distributed=False,
             rank=0,  # process id for distributed training
-            dry_run=False
+            dry_run=False, 
+            wandb = None,
+            train_error = False,
     ):
         self.model = model
         self.optimizer = optimizer
@@ -115,7 +117,8 @@ class Trainer:
         self.generator = torch.Generator(device).manual_seed(8191 + self.rank)
 
         self.sample_seed = 131071 + self.rank  # process-specific seed
-
+        self.wandb = wandb
+        self.train_error = train_error
         self.use_ema = use_ema
         if use_ema:
             if isinstance(model, DDP):
@@ -144,12 +147,27 @@ class Trainer:
         loss = self.diffusion.train_losses(self.model, **self.get_input(x))
         assert loss.shape == (x.shape[0],)
         return loss
+    def error_loss(self, x):
+        error_loss = self.diffusion.train_errorlosses(self.model, **self.get_input(x))
+        assert error_loss.shape == (x.shape[0],)
+        return error_loss
 
     def step(self, x, global_steps=1):
         # Note: For DDP models, the gradients collected from different devices are averaged rather than summed.
         # See https://pytorch.org/docs/1.12/generated/torch.nn.parallel.DistributedDataParallel.html
         # Mean-reduced loss should be used to avoid inconsistent learning rate issue when number of devices changes.
         loss = self.loss(x).mean()
+        self.wandb.log({"train_loss":loss})
+        
+        if self.train_error == True:
+            error_loss = self.error_loss(x).mean()
+            loss += error_loss
+        else:
+            with torch.no_grad():
+                error_loss = self.error_loss(x).mean()
+        self.wandb.log({"train_errorloss":error_loss})
+
+        
         loss.div(self.num_accum).backward()  # average over accumulated mini-batches
         if global_steps % self.num_accum == 0:
             # gradient clipping by global norm
@@ -168,6 +186,7 @@ class Trainer:
             dist.reduce(loss, dst=0, op=dist.ReduceOp.SUM)  # synchronize losses
             loss.div_(self.world_size)
         self.stats.update(x.shape[0], loss=loss.item() * x.shape[0])
+        return loss 
 
     def sample_fn(self, sample_size=None, noise=None, diffusion=None, sample_seed=None):
         if noise is None:
@@ -219,7 +238,11 @@ class Trainer:
                 x = self.sample_fn(sample_size=self.num_samples, sample_seed=self.sample_seed).cpu()
                 if self.is_leader:
                     save_image(x, os.path.join(image_dir, f"{e + 1}.jpg"), nrow=nrow)
-
+            
+            if e == 0:
+                print("first_eval")
+                eval_results = evaluator.eval(self.sample_fn, is_leader=self.is_leader)
+                print(eval_results)
             if not (e + 1) % self.chkpt_intv and chkpt_path:
                 self.model.eval()
                 if evaluator is not None:

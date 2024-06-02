@@ -22,7 +22,8 @@ class Evaluator:
             diffusion=None,
             eval_batch_size=256,
             eval_total_size=50000,
-            device=torch.device("cpu")
+            device=torch.device("cpu"),
+            wandb = None
     ):
         self.diffusion = diffusion
         # inception stats
@@ -31,6 +32,7 @@ class Evaluator:
         self.eval_total_size = eval_total_size
         self.device = device
         self.target_mean, self.target_var = get_precomputed(dataset)
+        self.wandb = wandb
 
     def eval(self, sample_fn, is_leader=True):
         if is_leader:
@@ -50,4 +52,6 @@ class Evaluator:
                         gen_mean, gen_var = self.istats.get_statistics()
                         fid = calc_fd(gen_mean, gen_var, self.target_mean, self.target_var)
                         t.set_postfix({"fid": fid})
+        print(f"fid:{fid}")
+        self.wandb.log({"fid":fid})
         return {"fid": fid}
